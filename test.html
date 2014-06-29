@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/test.js"></script>
+    <title></title>
+</head>
+<body>
+    <!-- Выводим вопросы -->
+    <div id="out">
+        <div class="show"></div>
+        <div class="page">
+            <br>
+            <a class="prev_question" href="#">< Назад </a> &nbsp;
+            <a class="next_question" href="#"> Назад  > </a>
+        </div>
+    </div>
+
+    <!-- Шаблон вопроса -->
+    <script id="temlate-test" type="text/template">
+        <h2><%= request %></h2>
+        <% _.each(items, function(caption, key){ %>
+            <input type="radio"  name="<%= id %>" id="<%= id+key %>" value="<%= key %>" <% if(select==key) print('checked')%>>
+            <label for="<%= id+key %>"> <%= caption %> </label>
+            <br>
+        <% }); %>
+    </script>
+
+    <!-- скрипт запускающий тест -->
+    <script type="text/javascript">
+        var data = [
+            {
+                "id": "r1",
+                "request": "Вопрос 1",
+                "items": {
+                    "1": "Ответ 1",
+                    "2": "Ответ 2",
+                    "3": "Ответ 3"
+                },
+                "select": null
+            },
+            {
+                "id": "r2",
+                "request": "Вопрос 2",
+                "items": {
+                    "1": "Ответ 4",
+                    "2": "Ответ 5",
+                    "3": "Ответ 6"
+                },
+                "select": null
+            }
+        ];
+
+        $(document).ready(function(){
+            var test = new appTest({
+                'bebug':true,
+                'data': data
+            })
+            test.PageLoad();
+            test.render();
+        });
+
+
+    </script>
+</body>
+</html>
